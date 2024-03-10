@@ -75,3 +75,5 @@ replay_pid*
 !.idea/codeStyles/*
 .idea/*
 /SecretSalty/src/main/resources/firebase_config.json
+
+app.log.*.gz

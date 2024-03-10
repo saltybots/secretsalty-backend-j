@@ -86,12 +86,13 @@ jooq {
 
                     generate.apply {
                         isDeprecated = false
-                        isRecords = false
                         isImmutablePojos = false
-                        isFluentSetters = false
+                        isRecords = true
+                        isFluentSetters = true
                     }
                     target.apply {
-                        packageName ="com.secretsalty.secretsalty"
+                        packageName = "data.jooq"
+                        directory = "src/main/java/com/secretsalty/secretsalty/data/jooq"
                     }
                 }
             }

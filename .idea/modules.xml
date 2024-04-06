@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SecretSalty.main.iml" filepath="$PROJECT_DIR$/.idea/modules/SecretSalty.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SecretSalty.test.iml" filepath="$PROJECT_DIR$/.idea/modules/SecretSalty.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/secretsalty-backend-j.iml" filepath="$PROJECT_DIR$/.idea/secretsalty-backend-j.iml" />
     </modules>
   </component>

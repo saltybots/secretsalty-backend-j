@@ -3,47 +3,121 @@
  */
 package data.jooq;
 
-
-import data.jooq.tables.Group;
-import data.jooq.tables.GuestUser;
-import data.jooq.tables.Participant;
-import data.jooq.tables.User;
-import data.jooq.tables.records.GroupRecord;
-import data.jooq.tables.records.GuestUserRecord;
-import data.jooq.tables.records.ParticipantRecord;
-import data.jooq.tables.records.UserRecord;
-
+import data.jooq.tables.AppGroup;
+import data.jooq.tables.AppParticipant;
+import data.jooq.tables.AppUser;
+import data.jooq.tables.records.AppGroupRecord;
+import data.jooq.tables.records.AppParticipantRecord;
+import data.jooq.tables.records.AppUserRecord;
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
 
-
-/**
- * A class modelling foreign key relationships and constraints of tables in
- * public.
- */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+/** A class modelling foreign key relationships and constraints of tables in public. */
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Keys {
 
-    // -------------------------------------------------------------------------
-    // UNIQUE and PRIMARY KEY definitions
-    // -------------------------------------------------------------------------
+  // -------------------------------------------------------------------------
+  // UNIQUE and PRIMARY KEY definitions
+  // -------------------------------------------------------------------------
 
-    public static final UniqueKey<GroupRecord> GROUP_PKEY = Internal.createUniqueKey(Group.GROUP, DSL.name("group_pkey"), new TableField[] { Group.GROUP.UUID }, true);
-    public static final UniqueKey<UserRecord> USER_EMAIL_KEY = Internal.createUniqueKey(User.USER, DSL.name("user_email_key"), new TableField[] { User.USER.EMAIL }, true);
-    public static final UniqueKey<UserRecord> USER_PKEY = Internal.createUniqueKey(User.USER, DSL.name("user_pkey"), new TableField[] { User.USER.UUID }, true);
+  public static final UniqueKey<AppGroupRecord> APP_GROUP_INVITE_KEY =
+      Internal.createUniqueKey(
+          AppGroup.APP_GROUP,
+          DSL.name("app_group_invite_key"),
+          new TableField[] {AppGroup.APP_GROUP.INVITE},
+          true);
+  public static final UniqueKey<AppGroupRecord> APP_GROUP_PKEY =
+      Internal.createUniqueKey(
+          AppGroup.APP_GROUP,
+          DSL.name("app_group_pkey"),
+          new TableField[] {AppGroup.APP_GROUP.UUID},
+          true);
+  public static final UniqueKey<AppUserRecord> APP_USER_EMAIL_KEY =
+      Internal.createUniqueKey(
+          AppUser.APP_USER,
+          DSL.name("app_user_email_key"),
+          new TableField[] {AppUser.APP_USER.EMAIL},
+          true);
+  public static final UniqueKey<AppUserRecord> APP_USER_FIREBASE_UID_KEY =
+      Internal.createUniqueKey(
+          AppUser.APP_USER,
+          DSL.name("app_user_firebase_uid_key"),
+          new TableField[] {AppUser.APP_USER.FIREBASE_UID},
+          true);
+  public static final UniqueKey<AppUserRecord> APP_USER_PKEY =
+      Internal.createUniqueKey(
+          AppUser.APP_USER,
+          DSL.name("app_user_pkey"),
+          new TableField[] {AppUser.APP_USER.UUID},
+          true);
 
-    // -------------------------------------------------------------------------
-    // FOREIGN KEY definitions
-    // -------------------------------------------------------------------------
+  // -------------------------------------------------------------------------
+  // FOREIGN KEY definitions
+  // -------------------------------------------------------------------------
 
-    public static final ForeignKey<GroupRecord, UserRecord> GROUP__GROUP_ADMIN_ID_FKEY = Internal.createForeignKey(Group.GROUP, DSL.name("group_admin_id_fkey"), new TableField[] { Group.GROUP.ADMIN_ID }, Keys.USER_PKEY, new TableField[] { User.USER.UUID }, true);
-    public static final ForeignKey<GuestUserRecord, GroupRecord> GUEST_USER__GUEST_USER_GROUP_ID_FKEY = Internal.createForeignKey(GuestUser.GUEST_USER, DSL.name("guest_user_group_id_fkey"), new TableField[] { GuestUser.GUEST_USER.GROUP_ID }, Keys.GROUP_PKEY, new TableField[] { Group.GROUP.UUID }, true);
-    public static final ForeignKey<ParticipantRecord, UserRecord> PARTICIPANT__PARTICIPANT_AVOID_FKEY = Internal.createForeignKey(Participant.PARTICIPANT, DSL.name("participant_avoid_fkey"), new TableField[] { Participant.PARTICIPANT.AVOID }, Keys.USER_PKEY, new TableField[] { User.USER.UUID }, true);
-    public static final ForeignKey<ParticipantRecord, UserRecord> PARTICIPANT__PARTICIPANT_BENGERL_ID_FKEY = Internal.createForeignKey(Participant.PARTICIPANT, DSL.name("participant_bengerl_id_fkey"), new TableField[] { Participant.PARTICIPANT.BENGERL_ID }, Keys.USER_PKEY, new TableField[] { User.USER.UUID }, true);
-    public static final ForeignKey<ParticipantRecord, UserRecord> PARTICIPANT__PARTICIPANT_EXCLUDED_FKEY = Internal.createForeignKey(Participant.PARTICIPANT, DSL.name("participant_excluded_fkey"), new TableField[] { Participant.PARTICIPANT.EXCLUDED }, Keys.USER_PKEY, new TableField[] { User.USER.UUID }, true);
-    public static final ForeignKey<ParticipantRecord, GroupRecord> PARTICIPANT__PARTICIPANT_GROUP_ID_FKEY = Internal.createForeignKey(Participant.PARTICIPANT, DSL.name("participant_group_id_fkey"), new TableField[] { Participant.PARTICIPANT.GROUP_ID }, Keys.GROUP_PKEY, new TableField[] { Group.GROUP.UUID }, true);
-    public static final ForeignKey<ParticipantRecord, UserRecord> PARTICIPANT__PARTICIPANT_USER_ID_FKEY = Internal.createForeignKey(Participant.PARTICIPANT, DSL.name("participant_user_id_fkey"), new TableField[] { Participant.PARTICIPANT.USER_ID }, Keys.USER_PKEY, new TableField[] { User.USER.UUID }, true);
+  public static final ForeignKey<AppGroupRecord, AppUserRecord>
+      APP_GROUP__APP_GROUP_ADMIN_UUID_FKEY =
+          Internal.createForeignKey(
+              AppGroup.APP_GROUP,
+              DSL.name("app_group_admin_uuid_fkey"),
+              new TableField[] {AppGroup.APP_GROUP.ADMIN_UUID},
+              Keys.APP_USER_PKEY,
+              new TableField[] {AppUser.APP_USER.UUID},
+              true);
+  public static final ForeignKey<AppParticipantRecord, AppUserRecord>
+      APP_PARTICIPANT__APP_PARTICIPANT_AVOID_FKEY =
+          Internal.createForeignKey(
+              AppParticipant.APP_PARTICIPANT,
+              DSL.name("app_participant_avoid_fkey"),
+              new TableField[] {AppParticipant.APP_PARTICIPANT.AVOID},
+              Keys.APP_USER_PKEY,
+              new TableField[] {AppUser.APP_USER.UUID},
+              true);
+  public static final ForeignKey<AppParticipantRecord, AppUserRecord>
+      APP_PARTICIPANT__APP_PARTICIPANT_BENGERL_UUID_FKEY =
+          Internal.createForeignKey(
+              AppParticipant.APP_PARTICIPANT,
+              DSL.name("app_participant_bengerl_uuid_fkey"),
+              new TableField[] {AppParticipant.APP_PARTICIPANT.BENGERL_UUID},
+              Keys.APP_USER_PKEY,
+              new TableField[] {AppUser.APP_USER.UUID},
+              true);
+  public static final ForeignKey<AppParticipantRecord, AppUserRecord>
+      APP_PARTICIPANT__APP_PARTICIPANT_EXCLUDED_FKEY =
+          Internal.createForeignKey(
+              AppParticipant.APP_PARTICIPANT,
+              DSL.name("app_participant_excluded_fkey"),
+              new TableField[] {AppParticipant.APP_PARTICIPANT.EXCLUDED},
+              Keys.APP_USER_PKEY,
+              new TableField[] {AppUser.APP_USER.UUID},
+              true);
+  public static final ForeignKey<AppParticipantRecord, AppGroupRecord>
+      APP_PARTICIPANT__APP_PARTICIPANT_GROUP_UUID_FKEY =
+          Internal.createForeignKey(
+              AppParticipant.APP_PARTICIPANT,
+              DSL.name("app_participant_group_uuid_fkey"),
+              new TableField[] {AppParticipant.APP_PARTICIPANT.GROUP_UUID},
+              Keys.APP_GROUP_PKEY,
+              new TableField[] {AppGroup.APP_GROUP.UUID},
+              true);
+  public static final ForeignKey<AppParticipantRecord, AppUserRecord>
+      APP_PARTICIPANT__APP_PARTICIPANT_USER_UUID_FKEY =
+          Internal.createForeignKey(
+              AppParticipant.APP_PARTICIPANT,
+              DSL.name("app_participant_user_uuid_fkey"),
+              new TableField[] {AppParticipant.APP_PARTICIPANT.USER_UUID},
+              Keys.APP_USER_PKEY,
+              new TableField[] {AppUser.APP_USER.UUID},
+              true);
+  public static final ForeignKey<AppUserRecord, AppGroupRecord> APP_USER__FK_GUEST_GROUP_ID =
+      Internal.createForeignKey(
+          AppUser.APP_USER,
+          DSL.name("fk_guest_group_id"),
+          new TableField[] {AppUser.APP_USER.GROUP_UUID},
+          Keys.APP_GROUP_PKEY,
+          new TableField[] {AppGroup.APP_GROUP.UUID},
+          true);
 }

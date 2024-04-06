@@ -3,42 +3,28 @@
  */
 package data.jooq;
 
-
-import data.jooq.tables.Group;
-import data.jooq.tables.GuestUser;
-import data.jooq.tables.Participant;
+import data.jooq.tables.AppGroup;
+import data.jooq.tables.AppParticipant;
+import data.jooq.tables.AppUser;
+import data.jooq.tables.Guest;
 import data.jooq.tables.RegisteredUser;
-import data.jooq.tables.User;
 
-
-/**
- * Convenience access to all tables in public.
- */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
+/** Convenience access to all tables in public. */
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
 public class Tables {
 
-    /**
-     * The table <code>public.group</code>.
-     */
-    public static final Group GROUP = Group.GROUP;
+  /** The table <code>public.app_group</code>. */
+  public static final AppGroup APP_GROUP = AppGroup.APP_GROUP;
 
-    /**
-     * The table <code>public.guest_user</code>.
-     */
-    public static final GuestUser GUEST_USER = GuestUser.GUEST_USER;
+  /** The table <code>public.app_participant</code>. */
+  public static final AppParticipant APP_PARTICIPANT = AppParticipant.APP_PARTICIPANT;
 
-    /**
-     * The table <code>public.participant</code>.
-     */
-    public static final Participant PARTICIPANT = Participant.PARTICIPANT;
+  /** The table <code>public.app_user</code>. */
+  public static final AppUser APP_USER = AppUser.APP_USER;
 
-    /**
-     * The table <code>public.registered_user</code>.
-     */
-    public static final RegisteredUser REGISTERED_USER = RegisteredUser.REGISTERED_USER;
+  /** The table <code>public.guest</code>. */
+  public static final Guest GUEST = Guest.GUEST;
 
-    /**
-     * The table <code>public.user</code>.
-     */
-    public static final User USER = User.USER;
+  /** The table <code>public.registered_user</code>. */
+  public static final RegisteredUser REGISTERED_USER = RegisteredUser.REGISTERED_USER;
 }

@@ -5,7 +5,7 @@ plugins {
     id("org.springframework.boot") version "3.2.1"
     id("nu.studer.jooq") version "9.0"
     id("com.google.cloud.tools.jib") version "3.4.0"
-    id("io.spring.dependency-management") version "1.1.4"
+    id("io.spring.dependency-management") version "1.1.5"
     id("org.openapi.generator") version "7.5.0"
     id("com.diffplug.spotless") version "6.25.0"
     id("org.springdoc.openapi-gradle-plugin") version "1.8.0"

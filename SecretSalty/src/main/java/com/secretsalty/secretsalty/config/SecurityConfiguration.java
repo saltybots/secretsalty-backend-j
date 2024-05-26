@@ -1,5 +1,6 @@
 package com.secretsalty.secretsalty.config;
 
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -11,12 +12,27 @@ import org.springframework.web.cors.CorsConfiguration;
 @Configuration
 public class SecurityConfiguration {
 
+  // TODO: add to cfg file
+  private static final List<String> ALLOWED_ORIGINS =
+      List.of(
+          "http://localhost:4200",
+          "http://localhost:8080",
+          "http://saltybots.xyz",
+          "https://saltybots.xyz");
+  private static final List<String> ALLOW_ALL = List.of(CorsConfiguration.ALL);
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors(
             httpSecurityCorsConfigurer ->
                 httpSecurityCorsConfigurer.configurationSource(
-                    request -> new CorsConfiguration().applyPermitDefaultValues()))
+                    request -> {
+                      final var corsConfiguration = new CorsConfiguration();
+                      corsConfiguration.setAllowedMethods(ALLOW_ALL);
+                      corsConfiguration.setAllowedHeaders(ALLOW_ALL);
+                      corsConfiguration.setAllowedOrigins(ALLOWED_ORIGINS);
+                      return corsConfiguration;
+                    }))
         .authorizeHttpRequests(
             authz ->
                 authz

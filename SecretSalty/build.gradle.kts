@@ -75,6 +75,23 @@ spotless {
 }
 
 /*
+    jib setup (docker)
+*/
+
+jib {
+    to {
+        image = "secretsalty-spring"
+        tags = setOf("0.0.1")
+    }
+    from {
+        image = "openjdk:21-slim"
+    }
+    container {
+        ports = listOf("8080", "8080")
+    }
+}
+
+/*
     JOOQ setup
 */
 jooq {
